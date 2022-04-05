@@ -2,10 +2,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS dotnetbuild
 WORKDIR /src
 
-COPY BattleshipsBE/BattleshipsBE/BattleshipsBE.csproj .
+COPY BE/OsztottSzavazasiRendszerBE/OsztottSzavazasiRendszerBE.csproj .
 RUN dotnet restore
 
-COPY BattleshipsBE/BattleshipsBE .
+COPY OsztottSzavazasiRendszerBE/OsztottSzavazasiRendszerBE .
 RUN dotnet build -c Release
 
 # RUN dotnet test ...
@@ -18,11 +18,11 @@ FROM node:alpine as buildvue
 
 WORKDIR /src
 
-COPY BattleshipsFE/package.json .
+COPY FE/package.json .
 RUN npm install
 
 # webpack build
-COPY BattleshipsFE .
+COPY FE .
 RUN npm run build
 
 
@@ -40,4 +40,4 @@ COPY --from=dotnetbuild /dist .
 # copy vue content into .net's static files folder:
 COPY --from=buildvue /src/dist /app/wwwroot
 
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet BattleshipsBE.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet OsztottSzavazasiRendszerBE.dll
