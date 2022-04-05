@@ -57,7 +57,7 @@ export default {
         redirect: "follow",
       };
 
-      fetch("https://localhost:7076/api/SubmittedForms", requestOptions)
+      fetch(window.origin + "/api/SubmittedForms", requestOptions)
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
@@ -74,7 +74,7 @@ export default {
     },
     GetForm() {
       console.log("Get Form called.");
-      fetch("https://localhost:7076/api/Forms/1", {
+      fetch(window.origin + "/api/Forms/1", {
         headers: {
           Accept: "text/plain",
         },
