@@ -5,7 +5,7 @@ WORKDIR /src
 COPY BE/OsztottSzavazasiRendszerBE/OsztottSzavazasiRendszerBE.csproj .
 RUN dotnet restore
 
-COPY OsztottSzavazasiRendszerBE/OsztottSzavazasiRendszerBE .
+COPY BE/OsztottSzavazasiRendszerBE .
 RUN dotnet build -c Release
 
 # RUN dotnet test ...
